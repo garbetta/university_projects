@@ -1,9 +1,0 @@
-IMAGE
-<*,*,*,*>: imgs/mario/sad.png
-----
-TEXT
-<*,*,*,*>: Sorry! Wrong Answer! Try again!
-----
-TTS
-<*,*,*,*>: Try again!
-----
