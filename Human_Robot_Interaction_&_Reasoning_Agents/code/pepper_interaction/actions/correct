@@ -1,0 +1,12 @@
+TEXT_title
+<*,*,*,*>: Good job
+----
+IMAGE
+<*,*,*,*>: imgs/mario/happy.png
+----
+TEXT
+<*,*,*,*>: Good job - Your  answer is rigth!
+----
+TTS
+<*,*,*,*>: Good job! Correct answer. YUPPY!
+----
