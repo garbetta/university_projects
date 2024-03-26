@@ -1,0 +1,13 @@
+IMAGE
+<*,*,*,*>:  imgs/mario/supermario_trashcan.png
+----
+TEXT
+<*,*,*,*>:  Welcome to Super Recycling Bros Game! <br><b>PRESS START</b>
+----
+TTS
+<*,*,*,*>:  Welcome to Super Recycling Bros Game!
+----
+BUTTONS
+start
+<*,*,*,*>: START
+----

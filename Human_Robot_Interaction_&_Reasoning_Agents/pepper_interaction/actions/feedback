@@ -1,0 +1,21 @@
+IMAGE
+<*,*,*,*>: imgs/feedback/questionnaire.png
+----
+TEXT
+<*,*,*,*>: Leave a feedback of your experience
+----
+TTS
+<*,*,*,*>: Leave a feedback of your experience
+----
+IMAGEBUTTONS
+1
+<*,*,*,*>: imgs/feedback/smile5.jpg
+2
+<*,*,*,*>: imgs/feedback/smile4.jpg
+3
+<*,*,*,*>: imgs/feedback/smile3.jpg
+4
+<*,*,*,*>: imgs/feedback/smile2.jpg
+5
+<*,*,*,*>: imgs/feedback/smile1.jpg
+----

@@ -1,0 +1,179 @@
+---
+swagger: "2.0"
+info:
+  description: "Bookshell API"
+  version: "1.0.0"
+  title: "Bookshell API"
+  contact:
+    email: "bookshell_it@hotmail.com"
+host: "virtserver.swaggerhub.com"
+basePath: "/RC_2020/Bookshell/1.0.0"
+tags:
+- name: "Users"
+schemes:
+- "https"
+- "http"
+paths:
+  /inSearch:
+    get:
+      tags:
+      - "Users"
+      summary: "search books"
+      description: "By passing in the appropriate options, you can search for available\
+        \ books in the system\n"
+      operationId: "inSearchGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "title"
+        in: "query"
+        description: "pass an optional search string for looking up title in searched\
+          \ books"
+        required: false
+        type: "string"
+      - name: "author"
+        in: "query"
+        description: "pass an optional search string for looking up author in searched\
+          \ books"
+        required: false
+        type: "string"
+      responses:
+        "200":
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/SearchItem"
+        "400":
+          description: "bad input parameter"
+      x-swagger-router-controller: "Users"
+  /code:
+    get:
+      tags:
+      - "Users"
+      summary: "callback function from Google Authentication OAuth2.0"
+      description: "When logged in with Google, the email is added to the DataBase,\
+        \ and it automatically login to the site\n"
+      operationId: "codeGET"
+      parameters:
+      - name: "code"
+        in: "query"
+        description: "code used to get token"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "redirect to search page"
+      x-swagger-router-controller: "Users"
+  /search:
+    get:
+      tags:
+      - "Users"
+      summary: "enter into search page"
+      description: "If user is logged, he can enter into search page, otherwise he\
+        \ redirected to login page\n"
+      operationId: "searchGET"
+      parameters:
+      - name: "loggedin"
+        in: "query"
+        description: "define if user is logged in or not"
+        required: false
+        type: "boolean"
+      responses:
+        "200":
+          description: "enter successfully into search page"
+        "400":
+          description: "redirect to login"
+      x-swagger-router-controller: "Users"
+  /register:
+    post:
+      tags:
+      - "Users"
+      summary: "registration"
+      description: "Adds user into DataBase"
+      operationId: "registerPOST"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "inputEmail"
+        in: "formData"
+        description: "user's email"
+        required: false
+        type: "string"
+      - name: "inputPassword"
+        in: "formData"
+        description: "user's password"
+        required: false
+        type: "string"
+      responses:
+        "201":
+          description: "user registered and logged"
+        "409":
+          description: "an existing user already exists"
+      x-swagger-router-controller: "Users"
+  /login:
+    post:
+      tags:
+      - "Users"
+      summary: "login"
+      description: "log for user into site"
+      operationId: "loginPOST"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "inputEmail"
+        in: "formData"
+        description: "user's email"
+        required: false
+        type: "string"
+      - name: "inputPassword"
+        in: "formData"
+        description: "user's password"
+        required: false
+        type: "string"
+      responses:
+        "201":
+          description: "user logged"
+        "409":
+          description: "user not registered"
+      x-swagger-router-controller: "Users"
+definitions:
+  SearchItem:
+    type: "object"
+    required:
+    - "books"
+    - "totalBooks"
+    properties:
+      totalBooks:
+        type: "integer"
+        format: "uuid"
+        example: 40
+      books:
+        $ref: "#/definitions/Books"
+    example:
+      books:
+        img: "http://books.google.com/books/content?id=DnASAAAAYAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        link: "https://play.google.com/store/books/details?id=DnASAAAAYAAJ&source=gbs_api"
+        title: "Del possesso qual titolo di diritti ..."
+      totalBooks: 40
+  Books:
+    required:
+    - "img"
+    - "link"
+    - "title"
+    properties:
+      title:
+        type: "string"
+        example: "Del possesso qual titolo di diritti ..."
+      link:
+        type: "string"
+        format: "url"
+        example: "https://play.google.com/store/books/details?id=DnASAAAAYAAJ&source=gbs_api"
+      img:
+        type: "string"
+        format: "url"
+        example: "http://books.google.com/books/content?id=DnASAAAAYAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    example:
+      img: "http://books.google.com/books/content?id=DnASAAAAYAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+      link: "https://play.google.com/store/books/details?id=DnASAAAAYAAJ&source=gbs_api"
+      title: "Del possesso qual titolo di diritti ..."

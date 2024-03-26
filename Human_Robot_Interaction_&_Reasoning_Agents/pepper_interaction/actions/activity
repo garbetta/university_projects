@@ -1,0 +1,25 @@
+IMAGE
+<*,*,*,*>:  imgs/pepper/8.png
+----
+TEXT
+<*,new,*,*>: What do you want to do?
+<*,old,*,*>: What do you want to do?
+----
+TTS
+<*,new,*,*>:  What do you want to do?
+<*,old,*,*>:  What do you want to do?
+----
+BUTTONS
+news
+<middle,new,*,*>: News
+<middle,old,*,*>: News
+play
+<elementary,new,*,*>:  PLAY 
+<elementary,old,*,*>:  PLAY 
+recycle
+<elementary,new,*,*>: RECYCLE
+<elementary,old,*,*>: RECYCLE
+<middle,old,*,*>: Recycle
+<middle,new,*,*>: Recycle
+----
+

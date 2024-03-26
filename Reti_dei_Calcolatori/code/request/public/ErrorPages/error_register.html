@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://localhost:8888/public/style.css" type="text/css"/>
+        <title>Not Found</title>
+    </head>
+
+    <body class="background">
+
+        <div class="box-error" style="height:240px; margin-top:8%; padding-top:2%;" name="formErr">
+            <h1 style="letter-spacing:0px; font-size: 32px;">Sorry, you are an already registered user</h1><br><br>
+            <button class="button" onclick="turn()">Turn back</button><br>
+            <script>
+                function turn() {
+                    window.open("http://localhost:8888/Login", '_self');
+                }
+            </script>
+        </div>
+
+    </body>
+</html>

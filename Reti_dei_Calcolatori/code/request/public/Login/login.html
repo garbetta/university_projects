@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="google-signin-client_id" content="360990063363-2o0q4258h43c2kq0u4jh9cjgemvn0k5f.apps.googleusercontent.com">
+        <link rel="stylesheet" href="http://localhost:8888/public/style.css" type="text/css">
+        <script type="text/javascript" lang="javascript" src="http://localhost:8888/public/Login/login.js"></script>
+    </head>
+    <body class="background">
+        <form class="box" style="height: 500px; margin-top:7%; padding-top:1%;" method="POST" name="loginForm" onSubmit="return validateForm();">
+            <h1>Login</h1><br>
+            <input type="email" name="inputEmail" class="input" placeholder="Email address" required onchange="checkEmail();" autofocus/><br><br>
+            <input type="password" name="inputPassword" class="input" placeholder="Password" required onchange="checkPassword();"/><br><br>
+            <br><br>
+            <button class="button" name="loginButton" type="submit" formaction="http://localhost:8888/register">Register</button><br><br>
+            <button class="button" name="loginButton" type="submit" formaction="http://localhost:8888/login">Login</button><br><br>
+            <h5>Or</h5><br>
+            <div id="customBtn">
+                <span class="icon"></span>
+                <a class="buttonText" href='https://accounts.google.com/o/oauth2/auth?client_id=360990063363-2o0q4258h43c2kq0u4jh9cjgemvn0k5f.apps.googleusercontent.com&scope=https://www.googleapis.com/auth/userinfo.email&redirect_uri=http://localhost:8888/code&response_type=code'>Sign in with Google</a>
+            </div>
+        </form>
+    </body>
+</html>

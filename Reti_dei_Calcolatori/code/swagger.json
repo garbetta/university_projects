@@ -1,0 +1,188 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Bookshell API",
+    "version" : "1.0.0",
+    "title" : "Bookshell API",
+    "contact" : {
+      "email" : "bookshell_it@hotmail.com"
+    }
+  },
+  "host" : "localhost:8888",
+  "basePath" : "/",
+  "tags" : [ {
+    "name" : "Users"
+  } ],
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/inSearch" : {
+      "get" : {
+        "tags" : [ "Users" ],
+        "summary" : "search books",
+        "description" : "By passing in the appropriate options, you can search for available books in the system\n",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "title",
+          "in" : "query",
+          "description" : "pass an optional search string for looking up title in searched books",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "author",
+          "in" : "query",
+          "description" : "pass an optional search string for looking up author in searched books",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "search results matching criteria",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/SearchItem"
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/code" : {
+      "get" : {
+        "tags" : [ "Users" ],
+        "summary" : "callback function from Google Authentication OAuth2.0",
+        "description" : "When logged in with Google, the email is added to the DataBase, and it automatically login to the site\n",
+        "parameters" : [ {
+          "name" : "code",
+          "in" : "query",
+          "description" : "code used to get token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "redirect to search page"
+          }
+        }
+      }
+    },
+    "/search" : {
+      "get" : {
+        "tags" : [ "Users" ],
+        "summary" : "enter into search page",
+        "description" : "If user is logged, he can enter into search page, otherwise he redirected to login page\n",
+        "parameters" : [ {
+          "name" : "loggedin",
+          "in" : "query",
+          "description" : "define if user is logged in or not",
+          "required" : false,
+          "type" : "boolean"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "enter successfully into search page"
+          },
+          "400" : {
+            "description" : "redirect to login"
+          }
+        }
+      }
+    },
+    "/register" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "registration",
+        "description" : "Adds user into DataBase",
+        "consumes" : [ "application/x-www-form-urlencoded" ],
+        "parameters" : [ {
+          "name" : "inputEmail",
+          "in" : "formData",
+          "description" : "user's email",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "inputPassword",
+          "in" : "formData",
+          "description" : "user's password",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "user registered and logged"
+          },
+          "409" : {
+            "description" : "an existing user already exists"
+          }
+        }
+      }
+    },
+    "/login" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "login",
+        "description" : "log for user into site",
+        "consumes" : [ "application/x-www-form-urlencoded" ],
+        "parameters" : [ {
+          "name" : "inputEmail",
+          "in" : "formData",
+          "description" : "user's email",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "inputPassword",
+          "in" : "formData",
+          "description" : "user's password",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "user logged"
+          },
+          "409" : {
+            "description" : "user not registered"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "SearchItem" : {
+      "type" : "object",
+      "required" : [ "books", "totalBooks" ],
+      "properties" : {
+        "totalBooks" : {
+          "type" : "integer",
+          "format" : "uuid",
+          "example" : 40
+        },
+        "books" : {
+          "$ref" : "#/definitions/Books"
+        }
+      }
+    },
+    "Books" : {
+      "required" : [ "img", "link", "title" ],
+      "properties" : {
+        "title" : {
+          "type" : "string",
+          "example" : "Del possesso qual titolo di diritti ..."
+        },
+        "link" : {
+          "type" : "string",
+          "format" : "url",
+          "example" : "https://play.google.com/store/books/details?id=DnASAAAAYAAJ&source=gbs_api"
+        },
+        "img" : {
+          "type" : "string",
+          "format" : "url",
+          "example" : "http://books.google.com/books/content?id=DnASAAAAYAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        }
+      }
+    }
+  }
+}
